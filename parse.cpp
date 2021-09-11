@@ -13,5 +13,5 @@ using namespace llvm;
 std::unique_ptr<Module> ParseFile(const char* fName){
 	LLVMContext theContext;
 	SMDiagnostic err;
-	return ParseIRFile(fName, err, theContext);
+	return parseIRFile(fName, err, theContext);
 }
