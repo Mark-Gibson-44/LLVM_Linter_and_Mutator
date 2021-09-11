@@ -10,6 +10,7 @@ int main(int argv, char** argc){
 	}
 	auto parsed = ParseFile(argc[1]);
 	auto linting = Linter(std::move(parsed));
+	
 	linting.dumpInfo();
 	/*
 	 * Code

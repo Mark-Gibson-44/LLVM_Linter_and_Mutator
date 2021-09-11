@@ -5,8 +5,8 @@
 #define MAX_ARGS 4
 
 void Linter::lintFunctions(){
-	auto funcIter = m->begin();
-	while(funcIter != m->end()){
+	auto funcIter = M->begin();
+	while(funcIter != M->end()){
 		int argNum = 0;
 		auto argIter = funcIter->arg_begin();
 		while(argIter != funcIter->arg_end()){
@@ -24,7 +24,7 @@ void Linter::dumpInfo(){
 	std::cout << "#################" << std::endl;
 	std::cout << "General Analysis" << std::endl;
 	std::cout << "#################" << std::endl;
-	std::cout << "Instruction Count" << m->getInstructionCount(); << std::endl;
+	std::cout << "Instruction Count" << M->getInstructionCount() << std::endl;
 	
 }
 

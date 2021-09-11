@@ -4,7 +4,7 @@ project(Linter)
 
 find_package(LLVM REQUIRED CONFIG)
 
-add_executable(run main.cpp)
+add_executable(run main.cpp Linter.cpp)
 
 include_directories(${LLVM_INCLUDE_DIRS})
 add_definitions(${LLVM_DEFINITIONS})
