@@ -10,8 +10,7 @@ using namespace llvm;
  * sets up context and error with the corresponding file
  */
 
-std::unique_ptr<Module> ParseFile(const char* fName){
-	LLVMContext theContext;
-	SMDiagnostic err;
-	return parseIRFile(fName, err, theContext);
+std::unique_ptr<Module> ParseFile(const char* fName, LLVMContext& theContext, SMDiagnostic& err){
+	
+	return std::move(parseIRFile(fName, err, theContext));
 }
