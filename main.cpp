@@ -20,6 +20,8 @@ int main(int argv, char** argc){
 	auto linting = Linter(std::move(parsed));
 	
 	linting.dumpInfo();
+	linting.lintFunctions();
+	linting.tidy();
 	/*
 	 * Code
 	 */

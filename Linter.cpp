@@ -7,6 +7,7 @@
 void Linter::lintFunctions(){
 	auto funcIter = M->begin();
 	while(funcIter != M->end()){
+		std::cout << "Function Name after Mangling: " << funcIter->getGlobalIdentifier() << std::endl;
 		int argNum = 0;
 		auto argIter = funcIter->arg_begin();
 		while(argIter != funcIter->arg_end()){
@@ -29,5 +30,16 @@ void Linter::dumpInfo(){
 }
 
 void Linter::tidy(){
-
+	auto funcIter = M->begin();
+	while(funcIter != M->end()){
+		for(auto& BB: *funcIter){
+			for(auto& stmt : BB){
+				std::cout << stmt.getOpcodeName() << std::endl;
+				if(stmt.isBinaryOp())
+					std::cout << "BINOP\n";
+				
+			}
+		}
+		funcIter++;
+	}
 }
