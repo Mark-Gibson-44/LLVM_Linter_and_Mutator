@@ -4,6 +4,7 @@
 #include "llvm/Transforms/Utils/BasicBlockUtils.h"
 #include "llvm/IR/LegacyPassManager.h"
 #include "llvm/IR/IRBuilder.h"
+#include "llvm/IR/Value.h"
 
 #include <iostream>
 
@@ -39,12 +40,26 @@ void Mutator::mutateBinaryExpr(){
 
 		
 		auto builder = std::make_unique<IRBuilder<>>(r);
-		builder->CreateFAdd(r->getOperand(0), r->getOperand(1), "addtmp");
+		switch(r->getOpcode()){
+			case Instruction::Add:
+				builder->CreateSub(r->getOperand(0), r->getOperand(1), "Mutate_neg");
+				break;
+			case Instruction::Mul:
+				builder->CreateUDiv(r->getOperand(0), r->getOperand(1), "Mutate_Mul");
+				break;
+			case Instruction::Sub:
+				builder->CreateAdd(r->getOperand(0), r->getOperand(1), "Mutate_add");
+			case Instruction::UDiv:
+				builder->CreateMul(r->getOperand(0), r->getOperand(1), "Mutate_Mul");
+				
+		}
+		
 	
 		r->eraseFromParent();
 	}
 	
 	std::cout  << "Instruction Count After Removal: " << M->getInstructionCount() << std::endl;
+
 
 }
 void Mutator::mutateUnaryExpr(){
